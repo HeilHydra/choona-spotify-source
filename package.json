@@ -2,7 +2,7 @@
   "name": "choona-spotify-source",
   "version": "0.1.0",
   "description": "Spotify source for Choona",
-  "main": "index.js",
+  "main": "service.js",
   "scripts": {
     "test": "make test"
   },
@@ -18,5 +18,16 @@
   "bugs": {
     "url": "https://github.com/HeilHydra/choona-spotify-source/issues"
   },
-  "homepage": "https://github.com/HeilHydra/choona-spotify-source"
+  "homepage": "https://github.com/HeilHydra/choona-spotify-source",
+  "dependencies": {
+    "config": "^1.12.0",
+    "js-yaml": "^3.2.7",
+    "lame": "^1.2.1",
+    "speaker": "^0.2.4",
+    "spotify-web": "git://github.com/TooTallNate/node-spotify-web.git",
+    "waterway": "^0.1.0",
+    "when": "^3.7.2",
+    "xml2js": "^0.4.6"
+  },
+  "devDependencies": {}
 }
