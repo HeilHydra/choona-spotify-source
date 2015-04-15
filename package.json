@@ -22,12 +22,9 @@
   "dependencies": {
     "config": "^1.12.0",
     "js-yaml": "^3.2.7",
-    "lame": "^1.2.1",
-    "speaker": "^0.2.4",
     "spotify-web": "git://github.com/TooTallNate/node-spotify-web.git",
-    "waterway": "^0.1.0",
+    "waterway": "git://github.com/HeilHydra/waterway#refactor-streams.git",
     "when": "^3.7.2",
     "xml2js": "^0.4.6"
-  },
-  "devDependencies": {}
+  }
 }
