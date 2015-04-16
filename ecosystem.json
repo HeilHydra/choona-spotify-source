@@ -1,0 +1,25 @@
+{
+  "apps" : [{
+    "name": "choona-spotify-source",
+    "script": "service.js"
+  }],
+
+  "deploy" : {
+    "production" : {
+      "user" : "root",
+      "host" : "choona.net",
+      "ref"  : "origin/master",
+      "repo" : "git@github.com:HeilHydra/choona-spotify-source.git",
+      "path" : "/var/www/choona-spotify-source/production",
+      "post-deploy" : "npm install && pm2 startOrRestart ecosystem.json --env production"
+    },
+    "staging" : {
+      "user" : "root",
+      "host" : "choona.net",
+      "ref"  : "origin/staging",
+      "repo" : "git@github.com:HeilHydra/choona-spotify-source.git",
+      "path" : "/var/www/choona-spotify-source/staging",
+      "post-deploy" : "npm install && pm2 startOrRestart ecosystem.json --env staging"
+    }
+  }
+}
