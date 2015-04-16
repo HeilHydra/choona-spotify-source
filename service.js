@@ -3,15 +3,15 @@ var SpotifyClient = require("./lib/SpotifyClient");
 var config = require("config");
 var Throttle = require("throttle");
 
-var app = new Waterway(config.waterway);
+var service = new Waterway(config.waterway);
 var spotifyClient = new SpotifyClient(config.spotify);
 
-app.request("source", "spotify", "search", ":searchString")
+service.request("source", "spotify", "search", ":searchString")
   .respond(function (req) {
     return spotifyClient.search(req.params.searchString);
   });
 
-app.request("source", "spotify", "getTrack", ":trackId")
+service.request("source", "spotify", "getTrack", ":trackId")
   .respond(function (req) {
     return spotifyClient.get("spotify:track:" + req.params.trackId)
       .then(function (track) {
@@ -20,7 +20,7 @@ app.request("source", "spotify", "getTrack", ":trackId")
       });
   });
 
-app.stream("source", "spotify", "play", ":trackId")
+service.stream("source", "spotify", "play", ":trackId")
   .writable(function (stream, req) {
     spotifyClient.get("spotify:track:" + req.params.trackId)
       .then(function (track) {
