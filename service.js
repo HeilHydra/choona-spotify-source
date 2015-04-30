@@ -38,7 +38,7 @@ function normalizeTrack(track) {
     id: base62.fromHex(util.gid2id(track.gid), 22),
     title: track.name,
     length: parseInt(track.duration, 10),
-    artist: track.artist.name,
+    artist: track.artist[0].name,
     cover: {
       large: _.findWhere(track.album.cover, { size: "LARGE" }).uri,
       normal: _.findWhere(track.album.cover, { size: "DEFAULT" }).uri,
