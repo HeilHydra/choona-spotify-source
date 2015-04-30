@@ -25,7 +25,7 @@ service.stream("source", "spotify", "play", ":trackId")
     spotifyClient.get("spotify:track:" + req.params.trackId)
       .then(function (track) {
         track
-          .playPreview()
+          .play()
           .pipe(new Throttle(12000))
           .pipe(stream);
       });
