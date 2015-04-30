@@ -26,7 +26,7 @@ service.stream("source", "spotify", "play", ":trackId")
       .then(function (track) {
         track
           .play()
-          .pipe(new Throttle(12000))
+          .pipe(new Throttle(20000))
           .pipe(stream);
       });
   });
