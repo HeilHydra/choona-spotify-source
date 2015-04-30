@@ -2,6 +2,8 @@ var Waterway = require("waterway");
 var SpotifyClient = require("./lib/SpotifyClient");
 var config = require("config");
 var Throttle = require("throttle");
+var util = require("spotify-web/lib/util");
+var _ = require("lodash-node");
 
 var service = new Waterway(config.waterway);
 var spotifyClient = new SpotifyClient(config.spotify);
@@ -13,11 +15,9 @@ service.request("source", "spotify", "search", ":searchString")
 
 service.request("source", "spotify", "getTrack", ":trackId")
   .respond(function (req) {
-    return spotifyClient.get("spotify:track:" + req.params.trackId)
-      .then(function (track) {
-        normalizeTrack(track, req.params.trackId);
-        return track;
-      });
+    return spotifyClient
+      .get("spotify:track:" + req.params.trackId)
+      .then(normalizeTrack);
   });
 
 service.stream("source", "spotify", "play", ":trackId")
@@ -32,13 +32,18 @@ service.stream("source", "spotify", "play", ":trackId")
   });
 
 
-function normalizeTrack(track, id) {
-  delete track.file;
-  delete track.preview;
-  delete track.alternative;
-  delete track._loaded;
-  track.id = id;
-  Object.defineProperty(track, "previewUrl", function () {
-    return "";
-  });
+function normalizeTrack(track) {
+  var output = {
+    id: util.gid2id(track.gid),
+    title: track.name,
+    length: parseInt(track.duration, 10),
+    artist: track.artist.name,
+    cover: {
+      large: _.findWhere(track.album.cover, { size: "LARGE" }).uri,
+      normal: _.findWhere(track.album.cover, { size: "DEFAULT" }).uri,
+      small: _.findWhere(track.album.cover, { size: "SMALL" }).uri,
+    }
+  };
+
+  return output;
 }

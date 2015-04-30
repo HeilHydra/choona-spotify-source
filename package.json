@@ -22,6 +22,7 @@
   "dependencies": {
     "config": "^1.12.0",
     "js-yaml": "^3.2.7",
+    "lodash-node": "^3.7.0",
     "spotify-web": "git://github.com/TooTallNate/node-spotify-web.git",
     "throttle": "^1.0.3",
     "waterway": "git://github.com/HeilHydra/waterway#refactor-streams",
