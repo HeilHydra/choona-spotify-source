@@ -3,6 +3,7 @@ var SpotifyClient = require("./lib/SpotifyClient");
 var config = require("config");
 var Throttle = require("throttle");
 var util = require("spotify-web/lib/util");
+var base62 = require("spotify-web/lib/base62");
 var _ = require("lodash-node");
 
 var service = new Waterway(config.waterway);
@@ -34,7 +35,7 @@ service.stream("source", "spotify", "play", ":trackId")
 
 function normalizeTrack(track) {
   var output = {
-    id: util.gid2id(track.gid),
+    id: base62.fromHex(util.gid2id(track.gid), 22),
     title: track.name,
     length: parseInt(track.duration, 10),
     artist: track.artist.name,
